@@ -10,42 +10,39 @@ import UIKit
 
 class ActivityTableViewController: UITableViewController {
 
+    var activities: [Activity] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
+        activities.append(Activity(name: "iOS Dev", description: "iOS Development"))
+        activities.append(Activity(name: "Sharks", description: "Shark Cage Diving"))
+        
+        let activity = Activity(name: "Zipline", description: "Ziplining")
+        activities.append(activity)
+        
+        self.tableView.reloadData()
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return activities.count
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath)
 
         // Configure the cell...
+        cell.textLabel?.text = activities[indexPath.row].name
+        cell.detailTextLabel?.text = activities[indexPath.row].description
 
         return cell
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.
