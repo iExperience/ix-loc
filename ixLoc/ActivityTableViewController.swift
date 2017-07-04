@@ -43,6 +43,16 @@ class ActivityTableViewController: UITableViewController {
 
         return cell
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "navToAddActivity" {
+            let addActivityNavigationController = segue.destination as! UINavigationController
+            
+            let addActivityViewController = addActivityNavigationController.topViewController as!AddActivityViewController
+            
+            addActivityViewController.activityTableViewController = self
+        }
+    }
 
     /*
     // Override to support conditional editing of the table view.
