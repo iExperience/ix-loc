@@ -12,6 +12,7 @@
 		B87025E61F0BD0E40024E301 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B87025E41F0BD0E40024E301 /* Main.storyboard */; };
 		B87025E81F0BD0E40024E301 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B87025E71F0BD0E40024E301 /* Assets.xcassets */; };
 		B87025EB1F0BD0E40024E301 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B87025E91F0BD0E40024E301 /* LaunchScreen.storyboard */; };
+		B87025F31F0BD4630024E301 /* ActivityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87025F21F0BD4630024E301 /* ActivityTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		B87025E71F0BD0E40024E301 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B87025EA1F0BD0E40024E301 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B87025EC1F0BD0E40024E301 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B87025F21F0BD4630024E301 /* ActivityTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 				B87025E71F0BD0E40024E301 /* Assets.xcassets */,
 				B87025E91F0BD0E40024E301 /* LaunchScreen.storyboard */,
 				B87025EC1F0BD0E40024E301 /* Info.plist */,
+				B87025F21F0BD4630024E301 /* ActivityTableViewController.swift */,
 			);
 			path = ixLoc;
 			sourceTree = "<group>";
@@ -139,6 +142,7 @@
 			files = (
 				B87025E31F0BD0E40024E301 /* MapViewController.swift in Sources */,
 				B87025E11F0BD0E40024E301 /* AppDelegate.swift in Sources */,
+				B87025F31F0BD4630024E301 /* ActivityTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
