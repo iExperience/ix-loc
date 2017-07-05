@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ActivityTableViewController: UITableViewController {
+class ActivityTableViewController: UITableViewController, AddActivityDelegate {
 
     var activities: [Activity] = []
     
@@ -50,8 +50,22 @@ class ActivityTableViewController: UITableViewController {
             
             let addActivityViewController = addActivityNavigationController.topViewController as!AddActivityViewController
             
-            addActivityViewController.activityTableViewController = self
+            addActivityViewController.delegate = self
         }
+    }
+    
+    func addActivity(activity: Activity) {
+        self.activities.append(activity)
+        self.tableView?.reloadData()
+    }
+    
+    func didAddActivity(activity: Activity) {
+        self.activities.append(activity)
+        self.tableView?.reloadData()
+    }
+    
+    func defaultName() -> String? {
+        return "Hello"
     }
 
     /*

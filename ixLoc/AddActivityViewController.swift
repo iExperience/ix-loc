@@ -13,10 +13,13 @@ class AddActivityViewController: UIViewController {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var descriptionTextView: UITextView!
     
-    var activityTableViewController: ActivityTableViewController?
+    var delegate: AddActivityDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let defaultName = delegate?.defaultName()
+        nameTextField.text = defaultName
     }
 
     @IBAction func cancel(_ sender: Any) {
@@ -27,8 +30,10 @@ class AddActivityViewController: UIViewController {
         
         let activity = Activity(name: nameTextField.text, description: descriptionTextView.text)
         
-        activityTableViewController?.activities.append(activity)
-        activityTableViewController?.tableView?.reloadData()
+        delegate?.didAddActivity(activity: activity)
+        
+        //activityTableViewController?.addActivity(activity: activity)
+        //mapViewController.addActivity(activity: activity)
         
         self.dismiss(animated: true, completion: nil)
     }

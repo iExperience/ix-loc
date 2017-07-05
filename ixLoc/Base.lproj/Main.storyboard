@@ -37,7 +37,7 @@
                     <navigationItem key="navigationItem" title="Map" id="elC-RG-Rpv">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="UcX-km-FA2">
                             <connections>
-                                <segue destination="607-ts-b8B" kind="presentation" id="Gfj-pU-Orh"/>
+                                <segue destination="607-ts-b8B" kind="presentation" identifier="navToAddActivity" id="Gfj-pU-Orh"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -179,6 +179,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="a0K-kf-8eb" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="3LZ-e5-ESd">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
@@ -249,6 +250,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="U7V-2O-IdI"/>
+        <segue reference="Gfj-pU-Orh"/>
     </inferredMetricsTieBreakers>
 </document>
