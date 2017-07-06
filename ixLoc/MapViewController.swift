@@ -13,9 +13,26 @@ class MapViewController: UIViewController, AddActivityDelegate {
 
     @IBOutlet weak var map: MKMapView!
     
+    var activity: Activity?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        /*
+        // Hardcoded instance of an Activity
+        self.activity = Activity(name: "Test", description: "Test", latitude: -33.918861, longitude: 18.423300)
+        
+        // Instantiate a new Coordinate
+        let coordinate = CLLocationCoordinate2D(latitude: (activity?.latitude!)!, longitude: (activity?.longitude!)!)
+        
+        // Instantiate a new Point
+        let point = MKPointAnnotation()
+        point.coordinate = coordinate
+        point.title = self.activity?.name
+        
+        // Add the point to the map
+        map.addAnnotation(point)
+         */
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,7 +51,16 @@ class MapViewController: UIViewController, AddActivityDelegate {
     }
     
     func didAddActivity(activity: Activity) {
-        // Add a pin to the map
+        // Instantiate a new Coordinate
+        let coordinate = CLLocationCoordinate2D(latitude: activity.latitude!, longitude: activity.longitude!)
+        
+        // Instantiate a new Point
+        let point = MKPointAnnotation()
+        point.coordinate = coordinate
+        point.title = activity.name
+        
+        // Add the point to the map
+        map.addAnnotation(point)
     }
     
     func defaultName() -> String? {

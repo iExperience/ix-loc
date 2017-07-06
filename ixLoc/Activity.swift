@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import MapKit
 
 class Activity {
     
@@ -25,6 +26,20 @@ class Activity {
         self.description = description
         self.latitude = latitude
         self.longitude = longitude
+    }
+    
+    init(name: String?, description: String?, location: CLLocationCoordinate2D) {
+        self.name = name
+        self.description = description
+        self.latitude = location.latitude
+        self.longitude = location.longitude
+    }
+    
+    func getAppleLocation() -> CLLocationCoordinate2D {
+        var coordinate = CLLocationCoordinate2D()
+        coordinate.latitude = self.latitude!
+        coordinate.longitude = self.longitude!
+        return coordinate
     }
     
 }
