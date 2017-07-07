@@ -75,6 +75,10 @@ class AddActivityViewController: UIViewController, CLLocationManagerDelegate, UI
             activity = Activity(name: nameTextField.text, description: descriptionTextView.text)
         }
         
+        if let image = self.selectedImage.image {
+            activity?.image = image
+        }
+        
         Alamofire.request("https://ixlocation.firebaseio.com/activities.json", method: .post, parameters: activity?.toJSON(), encoding: JSONEncoding.default).responseJSON(completionHandler: {response in
             
             switch response.result {

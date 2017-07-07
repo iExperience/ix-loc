@@ -24,7 +24,7 @@ class ActivityTableViewController: UITableViewController, AddActivityDelegate {
             
             if let activityDictionary = response.result.value as? [String: AnyObject] {
                 
-                self.activities = []
+                //self.activities = []
                 
                 for (key, value) in activityDictionary {
                     print("Key: \(key)")
@@ -52,15 +52,20 @@ class ActivityTableViewController: UITableViewController, AddActivityDelegate {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as! ActivityTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) //as! ActivityTableViewCell
 
         // Configure the cell...
-        //cell.textLabel?.text = activities[indexPath.row].name
-        //cell.detailTextLabel?.text = activities[indexPath.row].description
-        cell.name.text = activities[indexPath.row].name
-        cell.descriptionLabel.text = activities[indexPath.row].description
-        cell.latitude.text = "\(activities[indexPath.row].latitude)"
-        cell.longitude.text = "\(activities[indexPath.row].longitude)"
+        cell.textLabel?.text = activities[indexPath.row].name
+        cell.detailTextLabel?.text = activities[indexPath.row].description
+        
+        if let image = activities[indexPath.row].image {
+            cell.imageView?.image = image
+        }
+        
+        //cell.name.text = activities[indexPath.row].name
+        //cell.descriptionLabel.text = activities[indexPath.row].description
+        //cell.latitude.text = "\(activities[indexPath.row].latitude)"
+        //cell.longitude.text = "\(activities[indexPath.row].longitude)"
 
         return cell
     }
