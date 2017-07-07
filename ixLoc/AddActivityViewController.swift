@@ -10,8 +10,10 @@ import UIKit
 import MapKit
 import Alamofire
 
-class AddActivityViewController: UIViewController, CLLocationManagerDelegate {
+class AddActivityViewController: UIViewController, CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
+    @IBOutlet weak var selectedImage: UIImageView!
+    @IBOutlet weak var selectImageButton: UIButton!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var descriptionTextView: UITextView!
     
@@ -36,6 +38,29 @@ class AddActivityViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
 
+    @IBAction func selectImage(_ sender: Any) {
+        // Image picker
+        let imagePickerController: UIImagePickerController = UIImagePickerController()
+        
+        imagePickerController.delegate = self
+        
+        imagePickerController.sourceType = .savedPhotosAlbum
+        
+        self.present(imagePickerController, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        guard let selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage else {
+            fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
+        }
+        
+        self.selectedImage.image = selectedImage
+        self.selectImageButton.isHidden = true
+        
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func cancel(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }

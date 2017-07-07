@@ -85,6 +85,18 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MCO-xK-xNm">
+                                <rect key="frame" x="16" y="358" width="343" height="289"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m9m-UX-ABm">
+                                <rect key="frame" x="16" y="487" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Select image"/>
+                                <connections>
+                                    <action selector="selectImage:" destination="hLA-Mw-11x" eventType="touchUpInside" id="xCR-Vo-xjl"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -116,6 +128,8 @@
                     <connections>
                         <outlet property="descriptionTextView" destination="dY1-tR-ORz" id="a56-XY-ZL6"/>
                         <outlet property="nameTextField" destination="FPQ-iX-WnC" id="swJ-y8-98k"/>
+                        <outlet property="selectImageButton" destination="m9m-UX-ABm" id="Rnu-vr-6gh"/>
+                        <outlet property="selectedImage" destination="MCO-xK-xNm" id="FX7-dm-QQQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tjX-FO-Gde" userLabel="First Responder" sceneMemberID="firstResponder"/>

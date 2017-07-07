@@ -16,12 +16,15 @@ class Activity: Glossy, Decodable {
     var description: String?
     var latitude: Double?
     var longitude: Double?
+    var image: UIImage?
+    var imageUrl: String?
     
     required init?(json: JSON) {
         self.name = "name" <~~ json
         self.description = "description" <~~ json
         self.latitude = "latitude" <~~ json
         self.longitude = "longitude" <~~ json
+        self.imageUrl = "imageUrl" <~~ json
     }
     
     init(name: String?, description: String?) {
@@ -48,6 +51,7 @@ class Activity: Glossy, Decodable {
         self.description = dictionary["description"] as? String
         self.latitude = dictionary["latitude"] as? Double
         self.longitude = dictionary["longitude"] as? Double
+        self.imageUrl = dictionary["imageUrl"] as? String
     }
     
     func getAppleLocation() -> CLLocationCoordinate2D {
