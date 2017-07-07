@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import Alamofire
 
 class AddActivityViewController: UIViewController, CLLocationManagerDelegate {
 
@@ -49,9 +50,24 @@ class AddActivityViewController: UIViewController, CLLocationManagerDelegate {
             activity = Activity(name: nameTextField.text, description: descriptionTextView.text)
         }
         
+        Alamofire.request("https://ixlocation.firebaseio.com/activities.json", method: .post, parameters: activity?.toJSON(), encoding: JSONEncoding.default).responseJSON(completionHandler: {response in
+            
+            switch response.result {
+            case .success:
+                self.delegate?.didAddActivity(activity: activity!)
+                self.dismiss(animated: true, completion: nil)
+                break
+            case .failure:
+                // TODO: Display an error dialog
+                break
+            }
+            
+        })
+            
+        /*
         delegate?.didAddActivity(activity: activity!)
-        
         self.dismiss(animated: true, completion: nil)
+        */
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

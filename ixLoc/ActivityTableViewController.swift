@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class ActivityTableViewController: UITableViewController, AddActivityDelegate {
 
@@ -14,14 +15,30 @@ class ActivityTableViewController: UITableViewController, AddActivityDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        activities.append(Activity(name: "iOS Dev", description: "iOS Development"))
-        activities.append(Activity(name: "Sharks", description: "Shark Cage Diving"))
-        
-        let activity = Activity(name: "Zipline", description: "Ziplining")
-        activities.append(activity)
-        
-        self.tableView.reloadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        Alamofire.request("https://ixlocation.firebaseio.com/activities.json").responseJSON(completionHandler: {
+            response in
+            //print(response.result.value)
+            
+            if let activityDictionary = response.result.value as? [String: AnyObject] {
+                
+                self.activities = []
+                
+                for (key, value) in activityDictionary {
+                    print("Key: \(key)")
+                    print("Value: \(value)")
+                    
+                    if let singleActivityDictionary = value as? [String: AnyObject] {
+                        let activity = Activity(dictionary: singleActivityDictionary)
+                        self.activities.append(activity)
+                        self.tableView.reloadData()
+                    }
+                }
+                
+            }
+        })
     }
 
     // MARK: - Table view data source
@@ -35,11 +52,15 @@ class ActivityTableViewController: UITableViewController, AddActivityDelegate {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as! ActivityTableViewCell
 
         // Configure the cell...
-        cell.textLabel?.text = activities[indexPath.row].name
-        cell.detailTextLabel?.text = activities[indexPath.row].description
+        //cell.textLabel?.text = activities[indexPath.row].name
+        //cell.detailTextLabel?.text = activities[indexPath.row].description
+        cell.name.text = activities[indexPath.row].name
+        cell.descriptionLabel.text = activities[indexPath.row].description
+        cell.latitude.text = "\(activities[indexPath.row].latitude)"
+        cell.longitude.text = "\(activities[indexPath.row].longitude)"
 
         return cell
     }

@@ -8,13 +8,21 @@
 
 import Foundation
 import MapKit
+import Gloss
 
-class Activity {
+class Activity: Glossy, Decodable {
     
     var name: String?
     var description: String?
     var latitude: Double?
     var longitude: Double?
+    
+    required init?(json: JSON) {
+        self.name = "name" <~~ json
+        self.description = "description" <~~ json
+        self.latitude = "latitude" <~~ json
+        self.longitude = "longitude" <~~ json
+    }
     
     init(name: String?, description: String?) {
         self.name = name
@@ -35,11 +43,27 @@ class Activity {
         self.longitude = location.longitude
     }
     
+    init(dictionary: [String: AnyObject]) {
+        self.name = dictionary["name"] as? String
+        self.description = dictionary["description"] as? String
+        self.latitude = dictionary["latitude"] as? Double
+        self.longitude = dictionary["longitude"] as? Double
+    }
+    
     func getAppleLocation() -> CLLocationCoordinate2D {
         var coordinate = CLLocationCoordinate2D()
         coordinate.latitude = self.latitude!
         coordinate.longitude = self.longitude!
         return coordinate
+    }
+    
+    func toJSON() -> JSON? {
+        return jsonify([
+            "name" ~~> self.name,
+            "description" ~~> self.description,
+            "latitude" ~~> self.latitude,
+            "longitude" ~~> self.longitude
+        ])
     }
     
 }
