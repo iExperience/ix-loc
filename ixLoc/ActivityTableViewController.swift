@@ -11,7 +11,7 @@ import Alamofire
 
 class ActivityTableViewController: UITableViewController, AddActivityDelegate {
 
-    var activities: [Activity] = []
+    var activities: [ActivityDto] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +31,7 @@ class ActivityTableViewController: UITableViewController, AddActivityDelegate {
                     print("Value: \(value)")
                     
                     if let singleActivityDictionary = value as? [String: AnyObject] {
-                        let activity = Activity(dictionary: singleActivityDictionary)
+                        let activity = ActivityDto(dictionary: singleActivityDictionary)
                         self.activities.append(activity)
                         self.tableView.reloadData()
                     }
@@ -80,12 +80,12 @@ class ActivityTableViewController: UITableViewController, AddActivityDelegate {
         }
     }
     
-    func addActivity(activity: Activity) {
+    func addActivity(activity: ActivityDto) {
         self.activities.append(activity)
         self.tableView?.reloadData()
     }
     
-    func didAddActivity(activity: Activity) {
+    func didAddActivity(activity: ActivityDto) {
         self.activities.append(activity)
         self.tableView?.reloadData()
     }

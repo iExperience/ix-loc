@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 import Alamofire
+import RealmSwift
 
 class AddActivityViewController: UIViewController, CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -67,23 +68,34 @@ class AddActivityViewController: UIViewController, CLLocationManagerDelegate, UI
     
     @IBAction func save(_ sender: Any) {
         
-        var activity: Activity?
+        let activity = Activity()
+        activity.name = nameTextField.text!
+        activity.descr = descriptionTextView.text
+        
+        // Get the default Realm
+        let realm = try! Realm()
+        // You only need to do this once (per thread)
+        
+        // Add to the Realm inside a transaction
+        try! realm.write {
+            realm.add(activity)
+        }
+        
+        print(realm.configuration.fileURL)
+        
+        var activityDto: ActivityDto?
         
         if let location = self.latestLocation {
-            activity = Activity(name: nameTextField.text, description: descriptionTextView.text, latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+            activityDto = ActivityDto(name: nameTextField.text, description: descriptionTextView.text, latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
         } else {
-            activity = Activity(name: nameTextField.text, description: descriptionTextView.text)
+            activityDto = ActivityDto(name: nameTextField.text, description: descriptionTextView.text)
         }
         
-        if let image = self.selectedImage.image {
-            activity?.image = image
-        }
-        
-        Alamofire.request("https://ixlocation.firebaseio.com/activities.json", method: .post, parameters: activity?.toJSON(), encoding: JSONEncoding.default).responseJSON(completionHandler: {response in
+        Alamofire.request("https://ixlocation.firebaseio.com/activities.json", method: .post, parameters: activityDto?.toJSON(), encoding: JSONEncoding.default).responseJSON(completionHandler: {response in
             
             switch response.result {
             case .success:
-                self.delegate?.didAddActivity(activity: activity!)
+                self.delegate?.didAddActivity(activity: activityDto!)
                 self.dismiss(animated: true, completion: nil)
                 break
             case .failure:
@@ -92,11 +104,6 @@ class AddActivityViewController: UIViewController, CLLocationManagerDelegate, UI
             }
             
         })
-            
-        /*
-        delegate?.didAddActivity(activity: activity!)
-        self.dismiss(animated: true, completion: nil)
-        */
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

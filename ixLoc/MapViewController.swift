@@ -13,7 +13,7 @@ class MapViewController: UIViewController, AddActivityDelegate {
 
     @IBOutlet weak var map: MKMapView!
     
-    var activity: Activity?
+    var activity: ActivityDto?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +50,7 @@ class MapViewController: UIViewController, AddActivityDelegate {
         }
     }
     
-    func didAddActivity(activity: Activity) {
+    func didAddActivity(activity: ActivityDto) {
         // Instantiate a new Coordinate
         let coordinate = CLLocationCoordinate2D(latitude: activity.latitude!, longitude: activity.longitude!)
         
