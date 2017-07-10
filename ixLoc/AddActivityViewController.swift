@@ -71,6 +71,8 @@ class AddActivityViewController: UIViewController, CLLocationManagerDelegate, UI
         let activity = Activity()
         activity.name = nameTextField.text!
         activity.descr = descriptionTextView.text
+        activity.latitude = 1.0
+        activity.longitude = 2.0
         
         // Get the default Realm
         let realm = try! Realm()

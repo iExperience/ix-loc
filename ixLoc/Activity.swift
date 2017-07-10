@@ -12,4 +12,6 @@ import RealmSwift
 class Activity: Object {
     dynamic var name = ""
     dynamic var descr = ""
+    dynamic var latitude = 0.0
+    dynamic var longitude = 0.0
 }

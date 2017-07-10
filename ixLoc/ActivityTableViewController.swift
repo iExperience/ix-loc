@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import RealmSwift
 
 class ActivityTableViewController: UITableViewController, AddActivityDelegate {
 
@@ -18,6 +19,18 @@ class ActivityTableViewController: UITableViewController, AddActivityDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
+        // Get the default Realm
+        let realm = try! Realm()
+        let acts = realm.objects(Activity.self)
+        
+        for act in acts {
+            activities.append(ActivityDto(name: act.name, description: act.descr))
+        }
+        
+        tableView.reloadData()
+        
+        /*
         Alamofire.request("https://ixlocation.firebaseio.com/activities.json").responseJSON(completionHandler: {
             response in
             //print(response.result.value)
@@ -39,6 +52,7 @@ class ActivityTableViewController: UITableViewController, AddActivityDelegate {
                 
             }
         })
+        */
     }
 
     // MARK: - Table view data source
