@@ -9,5 +9,7 @@ target 'ixLoc' do
   pod 'Alamofire', '~> 4.4'
   pod 'Gloss', '~> 1.2'
   pod 'RealmSwift'
+  pod 'Firebase'
+  pod 'Firebase/Auth'
 
 end
