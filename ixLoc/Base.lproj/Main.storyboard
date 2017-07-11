@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="a0K-kf-8eb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Hl5-kt-UVC">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -186,6 +186,40 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zaI-gS-E33" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1916" y="510.49475262368821"/>
+        </scene>
+        <!--Login View Controller-->
+        <scene sceneID="Q9C-i8-2NN">
+            <objects>
+                <viewController id="Hl5-kt-UVC" customClass="LoginViewController" customModule="ixLoc" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="UIE-91-skf"/>
+                        <viewControllerLayoutGuide type="bottom" id="1am-RX-cCZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Qne-4T-iWM">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cHG-Yb-bTo">
+                                <rect key="frame" x="16" y="531" width="343" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="1am-RX-cCZ" firstAttribute="top" secondItem="cHG-Yb-bTo" secondAttribute="bottom" constant="8" symbolic="YES" id="8ne-SS-hsM"/>
+                            <constraint firstItem="cHG-Yb-bTo" firstAttribute="trailing" secondItem="Qne-4T-iWM" secondAttribute="trailingMargin" id="CcH-oA-ry5"/>
+                            <constraint firstItem="cHG-Yb-bTo" firstAttribute="top" secondItem="UIE-91-skf" secondAttribute="bottom" constant="511" id="Ld8-YS-OTx"/>
+                            <constraint firstItem="cHG-Yb-bTo" firstAttribute="leading" secondItem="Qne-4T-iWM" secondAttribute="leadingMargin" id="oxe-IM-C5n"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="loginContainerView" destination="cHG-Yb-bTo" id="bAs-wH-qFv"/>
+                        <segue destination="a0K-kf-8eb" kind="show" identifier="navToMain" id="GTn-4v-5da"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4b6-sp-UVG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-895.20000000000005" y="36.431784107946029"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="TwJ-4N-wzt">
