@@ -66,7 +66,8 @@ class ActivityDto: Glossy, Decodable {
             "name" ~~> self.name,
             "description" ~~> self.description,
             "latitude" ~~> self.latitude,
-            "longitude" ~~> self.longitude
+            "longitude" ~~> self.longitude,
+            "imageUrl" ~~> self.imageUrl
         ])
     }
     

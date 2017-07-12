@@ -10,6 +10,7 @@ import UIKit
 import MapKit
 import Alamofire
 import RealmSwift
+import FirebaseStorage
 
 class AddActivityViewController: UIViewController, CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -17,11 +18,14 @@ class AddActivityViewController: UIViewController, CLLocationManagerDelegate, UI
     @IBOutlet weak var selectImageButton: UIButton!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var descriptionTextView: UITextView!
+    @IBOutlet weak var progress: UIProgressView!
     
     var delegate: AddActivityDelegate?
     
     let locationManager: CLLocationManager = CLLocationManager()
     var latestLocation: CLLocation?
+    
+    var activityDto: ActivityDto?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,6 +72,91 @@ class AddActivityViewController: UIViewController, CLLocationManagerDelegate, UI
     
     @IBAction func save(_ sender: Any) {
         
+        if let location = self.latestLocation {
+            activityDto = ActivityDto(name: nameTextField.text, description: descriptionTextView.text, latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+        } else {
+            activityDto = ActivityDto(name: nameTextField.text, description: descriptionTextView.text)
+        }
+        
+        if let image = selectedImage.image {
+            // Get a reference to the storage service using the default Firebase App
+            let storage = Storage.storage()
+            
+            // Create a storage reference from our storage service
+            let storageRef = storage.reference()
+            
+            var url = ""
+            if let name = activityDto?.name {
+                url = "images/\(name).jpg"
+            } else {
+                url = "images/random.jpg"
+            }
+            
+            let imagesRef = storageRef.child(url)
+            
+            // Local file you want to upload
+            //let localFile = image. //URL(string: "path/to/image")!
+            
+            // Create the file metadata
+            let metadata = StorageMetadata()
+            metadata.contentType = "image/jpeg"
+            
+            // Upload file and metadata to the object 'images/mountains.jpg'
+            //let uploadTask = storageRef.putFile(from: localFile, metadata: metadata)
+            let jpg = UIImageJPEGRepresentation(image, CGFloat(1))
+            let uploadTask = imagesRef.putData(jpg!)
+            
+            // Listen for state changes, errors, and completion of the upload.
+            uploadTask.observe(.resume) { snapshot in
+                // Upload resumed, also fires when the upload starts
+            }
+            
+            uploadTask.observe(.pause) { snapshot in
+                // Upload paused
+            }
+            
+            uploadTask.observe(.progress) { snapshot in
+                // Upload reported progress
+                let percentComplete = 100.0 * Double(snapshot.progress!.completedUnitCount)
+                    / Double(snapshot.progress!.totalUnitCount)
+                self.progress.progress = Float(percentComplete)
+            }
+            
+            uploadTask.observe(.success) { snapshot in
+                // Upload completed successfully
+                self.activityDto?.imageUrl = snapshot.metadata?.downloadURL()?.absoluteString
+                self.postActivity()
+            }
+            
+            uploadTask.observe(.failure) { snapshot in
+                if let error = snapshot.error as? NSError {
+                    switch (StorageErrorCode(rawValue: error.code)!) {
+                    case .objectNotFound:
+                        // File doesn't exist
+                        break
+                    case .unauthorized:
+                        // User doesn't have permission to access file
+                        break
+                    case .cancelled:
+                        // User canceled the upload
+                        break
+                        
+                        /* ... */
+                        
+                    case .unknown:
+                        // Unknown error occurred, inspect the server response
+                        break
+                    default:
+                        // A separate error occurred. This is a good place to retry the upload.
+                        break
+                    }
+                }
+            }
+        } else {
+            postActivity()
+        }
+        
+        /*
         let activity = Activity()
         activity.name = nameTextField.text!
         activity.descr = descriptionTextView.text
@@ -84,20 +173,16 @@ class AddActivityViewController: UIViewController, CLLocationManagerDelegate, UI
         }
         
         print(realm.configuration.fileURL)
-        
-        var activityDto: ActivityDto?
-        
-        if let location = self.latestLocation {
-            activityDto = ActivityDto(name: nameTextField.text, description: descriptionTextView.text, latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-        } else {
-            activityDto = ActivityDto(name: nameTextField.text, description: descriptionTextView.text)
-        }
-        
-        Alamofire.request("https://ixlocation.firebaseio.com/activities.json", method: .post, parameters: activityDto?.toJSON(), encoding: JSONEncoding.default).responseJSON(completionHandler: {response in
+        */
+    
+    }
+    
+    func postActivity() {
+        Alamofire.request("https://ixloc-f5683.firebaseio.com/activities.json", method: .post, parameters: activityDto?.toJSON(), encoding: JSONEncoding.default).responseJSON(completionHandler: {response in
             
             switch response.result {
             case .success:
-                self.delegate?.didAddActivity(activity: activityDto!)
+                self.delegate?.didAddActivity(activity: self.activityDto!)
                 self.dismiss(animated: true, completion: nil)
                 break
             case .failure:
