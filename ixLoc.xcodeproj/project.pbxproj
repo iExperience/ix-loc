@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		3A72F4440F377BAF64119917 /* Pods_ixLoc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 901B5E8321B85C53FC3740C4 /* Pods_ixLoc.framework */; };
 		B82D774E1F13BF9D0013BFF9 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82D774D1F13BF9D0013BFF9 /* Activity.swift */; };
+		B82D77501F1504020013BFF9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B82D774F1F1504020013BFF9 /* GoogleService-Info.plist */; };
+		B82D77521F1509260013BFF9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82D77511F1509260013BFF9 /* LoginViewController.swift */; };
 		B83D551E1F0D15A300E2481A /* AddActivityDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83D551D1F0D15A300E2481A /* AddActivityDelegate.swift */; };
 		B83E86E51F0E7F650005F4F0 /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83E86E41F0E7F650005F4F0 /* ActivityTableViewCell.swift */; };
 		B87025E11F0BD0E40024E301 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87025E01F0BD0E40024E301 /* AppDelegate.swift */; };
@@ -26,6 +28,8 @@
 		901B5E8321B85C53FC3740C4 /* Pods_ixLoc.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ixLoc.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5D2A1171680A71CD1C2F583 /* Pods-ixLoc.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ixLoc.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ixLoc/Pods-ixLoc.debug.xcconfig"; sourceTree = "<group>"; };
 		B82D774D1F13BF9D0013BFF9 /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
+		B82D774F1F1504020013BFF9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B82D77511F1509260013BFF9 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B83D551D1F0D15A300E2481A /* AddActivityDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddActivityDelegate.swift; sourceTree = "<group>"; };
 		B83E86E41F0E7F650005F4F0 /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
 		B87025DD1F0BD0E40024E301 /* ixLoc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ixLoc.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -102,6 +106,8 @@
 				B83D551D1F0D15A300E2481A /* AddActivityDelegate.swift */,
 				B83E86E41F0E7F650005F4F0 /* ActivityTableViewCell.swift */,
 				B82D774D1F13BF9D0013BFF9 /* Activity.swift */,
+				B82D774F1F1504020013BFF9 /* GoogleService-Info.plist */,
+				B82D77511F1509260013BFF9 /* LoginViewController.swift */,
 			);
 			path = ixLoc;
 			sourceTree = "<group>";
@@ -172,6 +178,7 @@
 				B87025EB1F0BD0E40024E301 /* LaunchScreen.storyboard in Resources */,
 				B87025E81F0BD0E40024E301 /* Assets.xcassets in Resources */,
 				B87025E61F0BD0E40024E301 /* Main.storyboard in Resources */,
+				B82D77501F1504020013BFF9 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,6 +237,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B82D77521F1509260013BFF9 /* LoginViewController.swift in Sources */,
 				B87025E31F0BD0E40024E301 /* MapViewController.swift in Sources */,
 				B83D551E1F0D15A300E2481A /* AddActivityDelegate.swift in Sources */,
 				B87025E11F0BD0E40024E301 /* AppDelegate.swift in Sources */,
