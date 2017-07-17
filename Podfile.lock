@@ -1,5 +1,7 @@
 PODS:
   - Alamofire (4.5.0)
+  - AlamofireImage (3.2.0):
+    - Alamofire (~> 4.1)
   - Bolts (1.8.4):
     - Bolts/AppLinks (= 1.8.4)
     - Bolts/Tasks (= 1.8.4)
@@ -65,6 +67,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 4.4)
+  - AlamofireImage (~> 3.1)
   - FacebookCore
   - FacebookLogin
   - Firebase
@@ -75,6 +78,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
+  AlamofireImage: 157ed682cc81d3b9db4fb90c1f12180ac552d93b
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   FacebookCore: 2cb3f0fbff218e9d3119cec84bae983b232412de
   FacebookLogin: c9d606504735780a9e3002465a615512e0a691a5
@@ -92,6 +96,6 @@ SPEC CHECKSUMS:
   Realm: 3601ef091c8c499a31101d8563b991e75546cdce
   RealmSwift: 8183818515471b01a99abdd2970f8e4fd52b6f4a
 
-PODFILE CHECKSUM: e4615424354d5df17c56d0237f20183a8f6f79a9
+PODFILE CHECKSUM: 684edb8c31207aac6e0907f9be39715ae95548bd
 
 COCOAPODS: 1.2.1

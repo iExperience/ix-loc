@@ -7,6 +7,7 @@ target 'ixLoc' do
 
   # Pods for ixLoc
   pod 'Alamofire', '~> 4.4'
+  pod 'AlamofireImage', '~> 3.1'
   pod 'Gloss', '~> 1.2'
   pod 'RealmSwift'
   

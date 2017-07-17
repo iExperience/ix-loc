@@ -8,7 +8,9 @@
 
 import UIKit
 import Alamofire
+import AlamofireImage
 import RealmSwift
+import FirebaseStorage
 
 class ActivityTableViewController: UITableViewController, AddActivityDelegate {
 
@@ -20,6 +22,7 @@ class ActivityTableViewController: UITableViewController, AddActivityDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         
+        /*
         // Get the default Realm
         let realm = try! Realm()
         let acts = realm.objects(Activity.self)
@@ -29,30 +32,59 @@ class ActivityTableViewController: UITableViewController, AddActivityDelegate {
         }
         
         tableView.reloadData()
+        */
         
-        /*
-        Alamofire.request("https://ixlocation.firebaseio.com/activities.json").responseJSON(completionHandler: {
+        Alamofire.request("https://ixloc-f5683.firebaseio.com/activities.json").responseJSON(completionHandler: {
             response in
             //print(response.result.value)
             
             if let activityDictionary = response.result.value as? [String: AnyObject] {
                 
-                //self.activities = []
+                self.activities = []
                 
                 for (key, value) in activityDictionary {
-                    print("Key: \(key)")
-                    print("Value: \(value)")
                     
                     if let singleActivityDictionary = value as? [String: AnyObject] {
                         let activity = ActivityDto(dictionary: singleActivityDictionary)
+                        
+                        if let name = activity.name {
+                            Storage
+                                .storage()
+                                .reference()
+                                .child("images/\(name).jpg")
+                                .getData(maxSize: 1 * 1024 * 1024 * 1024) { data, error in
+                                    if let error = error {
+                                        // Uh-oh, an error occurred!
+                                    } else {
+                                        // Data for "images/island.jpg" is returned
+                                        activity.image = UIImage(data: data!)
+                                        self.tableView.reloadData()
+                                    }
+                            }
+                        }
+                        
+                        /*
+                        // Kick off the download in here
+                        if let url = activity.imageUrl {
+                            Alamofire.request(url).responseImage(completionHandler: { response in
+                                
+                                if let image = response.result.value {
+                                    activity.image = image
+                                    self.tableView.reloadData()
+                                }
+                                
+                            })
+                        }
+                        */
+                        
                         self.activities.append(activity)
                         self.tableView.reloadData()
                     }
+                    
                 }
                 
             }
         })
-        */
     }
 
     // MARK: - Table view data source
